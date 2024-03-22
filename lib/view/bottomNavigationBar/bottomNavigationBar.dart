@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:quicknomsrestaurant/menuScreen/menuScreen.dart';
+import 'package:quicknomsrestaurant/statusScreen/statusScreen.dart';
 import 'package:quicknomsrestaurant/view/account/account.dart';
-import 'package:quicknomsrestaurant/view/basket/basketScreen.dart';
-import 'package:quicknomsrestaurant/view/browse/browse.dart';
+import 'package:quicknomsrestaurant/view/addFoodItem/addFoodItem.dart';
 import 'package:quicknomsrestaurant/view/home/homeScreen.dart';
-import 'package:quicknomsrestaurant/view/grocery/groceryScreen.dart';
 
 class BottomNavigationBarQuickNoms extends StatefulWidget {
   const BottomNavigationBarQuickNoms({super.key});
@@ -25,33 +25,33 @@ class _BottomNavigationBarQuickNomsState
       controller: _controller,
       tabs: [
         PersistentTabConfig(
-          screen: const HomeScreen(),
+          screen: const AddFoodItemScreen(),
           item: ItemConfig(
             icon: const Icon(Icons.home),
             title: "Home",
           ),
         ),
         PersistentTabConfig(
-          screen: const BrowseScreen(),
+          screen: const MenuScreen(),
           item: ItemConfig(
-            icon: const Icon(Icons.calendar_view_month_sharp),
-            title: "Browse",
+            icon: const Icon(Icons.list),
+            title: "Menu",
           ),
         ),
         PersistentTabConfig(
-          screen: const GroceryScreen(),
+          screen: const StatusScreen(),
           item: ItemConfig(
-            icon: const Icon(Icons.shopping_bag),
-            title: "Grocery",
+            icon: const Icon(Icons.bar_chart_sharp),
+            title: "Status",
           ),
         ),
-        PersistentTabConfig(
-          screen: const BasketScreen(),
-          item: ItemConfig(
-            icon: const Icon(Icons.shopping_cart),
-            title: "Basket",
-          ),
-        ),
+        // PersistentTabConfig(
+        //   screen: const BasketScreen(),
+        //   item: ItemConfig(
+        //     icon: const Icon(Icons.shopping_cart),
+        //     title: "Basket",
+        //   ),
+        // ),
         PersistentTabConfig(
           screen: const AccountScreen(),
           item: ItemConfig(
