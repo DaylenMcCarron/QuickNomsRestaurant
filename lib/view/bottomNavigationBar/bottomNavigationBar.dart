@@ -6,6 +6,7 @@ import 'package:quicknomsrestaurant/statusScreen/statusScreen.dart';
 import 'package:quicknomsrestaurant/view/account/account.dart';
 import 'package:quicknomsrestaurant/view/addFoodItem/addFoodItem.dart';
 import 'package:quicknomsrestaurant/view/home/homeScreen.dart';
+import 'package:quicknomsrestaurant/view/restaurantRegistrationScreen/restaurantRegistrationScreen.dart';
 
 class BottomNavigationBarQuickNoms extends StatefulWidget {
   const BottomNavigationBarQuickNoms({super.key});
@@ -25,7 +26,7 @@ class _BottomNavigationBarQuickNomsState
       controller: _controller,
       tabs: [
         PersistentTabConfig(
-          screen: const AddFoodItemScreen(),
+          screen: const RestaurantRegistrationScreen(),
           item: ItemConfig(
             icon: const Icon(Icons.home),
             title: "Home",

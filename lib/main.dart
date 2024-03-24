@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quicknomsrestaurant/controller/provider/authProvider/authProvider.dart';
+import 'package:quicknomsrestaurant/controller/provider/restaurantRegisterProvider/restaurantRegisterProvider.dart';
 import 'package:quicknomsrestaurant/firebase_options.dart';
 import 'package:quicknomsrestaurant/view/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:quicknomsrestaurant/view/signInLogicScreen/signInLogicScreen.dart';
@@ -26,7 +27,9 @@ class QuickNoms extends StatelessWidget {
         return MultiProvider(
             providers: [
               ChangeNotifierProvider<MobileAuthProvider>(
-                  create: (_) => MobileAuthProvider())
+                  create: (_) => MobileAuthProvider()),
+              ChangeNotifierProvider<RestaurantRegisterProvider>(
+                  create: (_) => RestaurantRegisterProvider())
             ],
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,
