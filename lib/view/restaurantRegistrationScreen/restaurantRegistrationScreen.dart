@@ -5,8 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:quicknomsrestaurant/constant/constant.dart';
 import 'package:quicknomsrestaurant/controller/services/imageServices/imagesServices.dart';
+import 'package:quicknomsrestaurant/controller/services/locationServices/locationServices.dart';
+import 'package:quicknomsrestaurant/controller/services/restaurantCRUDServices/restaurantCRUDServices.dart';
+import 'package:quicknomsrestaurant/model/address.dart';
+import 'package:quicknomsrestaurant/model/restaurantModel.dart';
 import 'package:quicknomsrestaurant/utils/colors.dart';
 import 'package:quicknomsrestaurant/utils/textStyles.dart';
 import 'package:quicknomsrestaurant/widgits/textfieldWidget.dart';
@@ -134,8 +140,36 @@ class _RestaurantRegistrationScreenState
               keyboardType: TextInputType.name,
             ),
             SizedBox(
-              height: 2.h,
+              height: 30.h,
             ),
+            ElevatedButton(
+              onPressed: () async {
+                await context
+                    .read<RestaurantRegisterProvider>()
+                    .updateRestaurantBannerImagesURL(context);
+                Position currentAddress =
+                    await locationServices.getCurrentLocation();
+                RestaurantModel data = RestaurantModel(
+                  restaurantName: restaurantNameController.text.trim(),
+                  restaurantLicenseNumber:
+                      restaurantLicenseNumberController.text.trim(),
+                  restaurantUID: auth.currentUser!.uid,
+                  bannerImages: context
+                      .read<RestaurantRegisterProvider>()
+                      .restaurantBannerImagesURL,
+                  address: AddressModel(
+                      latitude: currentAddress.latitude,
+                      longitude: currentAddress.longitude),
+                );
+                RestaurantCRUDServices.RegisterRestaurant(data, context);
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: black, minimumSize: Size(90.w, 6.h)),
+              child: Text(
+                'Register',
+                style: AppTextStyles.body16Bold.copyWith(color: white),
+              ),
+            )
           ],
         ),
       ),
