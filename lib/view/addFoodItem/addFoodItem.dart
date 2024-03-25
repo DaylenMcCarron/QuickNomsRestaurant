@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
-import 'package:quicknomsrestaurant/controller/provider/AddFoodProvider/AddFoodProvider.dart';
+import 'package:quicknomsrestaurant/controller/provider/FoodProvider/FoodProvider.dart';
 import 'package:quicknomsrestaurant/controller/services/foodDataCRUDServices/foodDataCRUDServices.dart';
-import 'package:quicknomsrestaurant/model/addFoodModel/addFoodModel.dart';
+import 'package:quicknomsrestaurant/model/FoodModel/FoodModel.dart';
 import 'package:quicknomsrestaurant/utils/colors.dart';
 import 'package:quicknomsrestaurant/utils/textStyles.dart';
 import 'package:quicknomsrestaurant/widgits/commonElevatedButton.dart';
@@ -46,8 +47,7 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
             SizedBox(
               height: 2.h,
             ),
-            Consumer<AddFoodProvider>(
-                builder: (context, addFoodProvider, child) {
+            Consumer<FoodProvider>(builder: (context, addFoodProvider, child) {
               return InkWell(
                   onTap: () async {
                     await addFoodProvider.pickFoodImageFromGallery(context);
@@ -229,16 +229,16 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
                   pressedAddFoodItemButton = true;
                 });
                 await context
-                    .read<AddFoodProvider>()
+                    .read<FoodProvider>()
                     .uploadImageAndGetImageURL(context);
                 String foodID = uuid.v1().toString();
-                AddFoodModel data = AddFoodModel(
+                FoodModel data = FoodModel(
                   name: foodNameController.text.trim(),
                   foodID: foodID,
-                  uploadTime: DateTime.now(),
+                  uploadTime: Timestamp.now(),
                   restaurantUID: auth.currentUser!.uid,
                   description: foodDescriptionController.text.trim(),
-                  foodImageURL: context.read<AddFoodProvider>().foodImageURL!,
+                  foodImageURL: context.read<FoodProvider>().foodImageURL!,
                   isVegetarian: foodIsPureVeg,
                   price: foodPriceController.text.trim(),
                 );

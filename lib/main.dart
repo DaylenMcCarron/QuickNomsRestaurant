@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quicknomsrestaurant/controller/provider/AddFoodProvider/AddFoodProvider.dart';
+import 'package:quicknomsrestaurant/controller/provider/FoodProvider/FoodProvider.dart';
 import 'package:quicknomsrestaurant/controller/provider/authProvider/authProvider.dart';
 import 'package:quicknomsrestaurant/controller/provider/restaurantRegisterProvider/restaurantRegisterProvider.dart';
 import 'package:quicknomsrestaurant/firebase_options.dart';
@@ -31,8 +31,8 @@ class QuickNoms extends StatelessWidget {
                   create: (_) => MobileAuthProvider()),
               ChangeNotifierProvider<RestaurantRegisterProvider>(
                   create: (_) => RestaurantRegisterProvider()),
-              ChangeNotifierProvider<AddFoodProvider>(
-                  create: (_) => AddFoodProvider())
+              ChangeNotifierProvider<FoodProvider>(
+                  create: (_) => FoodProvider())
             ],
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,

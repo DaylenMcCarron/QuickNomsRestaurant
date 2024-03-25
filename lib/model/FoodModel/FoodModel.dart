@@ -1,15 +1,17 @@
 import 'dart:convert';
 
-class AddFoodModel {
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class FoodModel {
   String name;
   String restaurantUID;
-  DateTime uploadTime;
+  Timestamp uploadTime;
   String foodID;
   String description;
   String foodImageURL;
   bool isVegetarian;
   String price;
-  AddFoodModel({
+  FoodModel({
     required this.name,
     required this.restaurantUID,
     required this.uploadTime,
@@ -33,20 +35,20 @@ class AddFoodModel {
     };
   }
 
-  factory AddFoodModel.fromMap(Map<String, dynamic> map) {
-    return AddFoodModel(
+  factory FoodModel.fromMap(Map<String, dynamic> map) {
+    return FoodModel(
       name: map['name'] as String,
-      restaurantUID: map['resturantUID'] as String,
-      uploadTime: map['uploadTime'] as DateTime,
+      restaurantUID: map['restaurantUID'] as String,
+      uploadTime: map['uploadTime'] as Timestamp,
       foodID: map['foodID'] as String,
       description: map['description'] as String,
       foodImageURL: map['foodImageURL'] as String,
-      isVegetarian: map['isVegetrain'] as bool,
+      isVegetarian: map['isVegetarian'] as bool,
       price: map['price'] as String,
     );
   }
   String toJson() => json.encode(toMap());
 
-  factory AddFoodModel.fromJson(String source) =>
-      AddFoodModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory FoodModel.fromJson(String source) =>
+      FoodModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
