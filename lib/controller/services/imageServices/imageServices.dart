@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
+import 'package:quicknomsrestaurant/controller/services/toastServices/toastMessageService.dart';
 
 class ImageServices {
   static getImagesFromGallery({required BuildContext context}) async {
@@ -17,7 +18,8 @@ class ImageServices {
         selectedImages.add(File(image.path));
       }
     } else {
-      // Show Toast message
+      ToastService.sendScaffoldAlert(
+          msg: 'No images selected', toastStatus: 'WARNING', context: context);
     }
     log('The Images are \n ${selectedImages.toList().toString()}');
     return selectedImages;
@@ -36,5 +38,19 @@ class ImageServices {
       imagesURL.add(imageURL);
     });
     return imagesURL;
+  }
+
+  static pickSingleImage({required BuildContext context}) async {
+    File? selectedImage;
+    final pickedFile =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 100);
+    XFile? filePick = pickedFile;
+    if (filePick != null) {
+      selectedImage = File(filePick.path);
+      return selectedImage;
+    } else {
+      ToastService.sendScaffoldAlert(
+          msg: 'No images selected', toastStatus: 'WARNING', context: context);
+    }
   }
 }

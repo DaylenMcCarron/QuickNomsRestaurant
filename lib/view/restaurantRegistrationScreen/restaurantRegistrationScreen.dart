@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
-import 'package:quicknomsrestaurant/controller/services/imageServices/imagesServices.dart';
+import 'package:quicknomsrestaurant/controller/services/imageServices/imageServices.dart';
 import 'package:quicknomsrestaurant/controller/services/locationServices/locationServices.dart';
 import 'package:quicknomsrestaurant/controller/services/restaurantCRUDServices/restaurantCRUDServices.dart';
 import 'package:quicknomsrestaurant/model/address.dart';

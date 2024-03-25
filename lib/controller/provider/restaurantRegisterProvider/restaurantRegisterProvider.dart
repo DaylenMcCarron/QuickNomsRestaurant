@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:quicknomsrestaurant/controller/services/imageServices/imagesServices.dart';
+import 'package:quicknomsrestaurant/controller/services/imageServices/imageServices.dart';
 
 class RestaurantRegisterProvider extends ChangeNotifier {
   List<File> restaurantBannerImages = [];
