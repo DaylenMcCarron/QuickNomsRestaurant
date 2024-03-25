@@ -26,7 +26,7 @@ class _BottomNavigationBarQuickNomsState
       controller: _controller,
       tabs: [
         PersistentTabConfig(
-          screen: const RestaurantRegistrationScreen(),
+          screen: const HomeScreen(),
           item: ItemConfig(
             icon: const Icon(Icons.home),
             title: "Home",
