@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:quicknomsrestaurant/constant/constant.dart';
 import 'package:quicknomsrestaurant/controller/provider/AddFoodProvider/AddFoodProvider.dart';
+import 'package:quicknomsrestaurant/controller/services/foodDataCRUDServices/foodDataCRUDServices.dart';
+import 'package:quicknomsrestaurant/model/addFoodModel/addFoodModel.dart';
 import 'package:quicknomsrestaurant/utils/colors.dart';
 import 'package:quicknomsrestaurant/utils/textStyles.dart';
+import 'package:quicknomsrestaurant/widgits/commonElevatedButton.dart';
 import 'package:quicknomsrestaurant/widgits/textfieldWidget.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,6 +23,7 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
   TextEditingController foodDescriptionController = TextEditingController();
   TextEditingController foodPriceController = TextEditingController();
   bool foodIsPureVeg = true;
+  bool pressedAddFoodItemButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +40,7 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
           ),
         ),
         body: ListView(
+          physics: const BouncingScrollPhysics(),
           padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 3.h),
           children: [
             SizedBox(
@@ -213,7 +219,40 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
                   ),
                 ),
               ],
-            )
+            ),
+            SizedBox(
+              height: 4.h,
+            ),
+            CommonElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  pressedAddFoodItemButton = true;
+                });
+                await context
+                    .read<AddFoodProvider>()
+                    .uploadImageAndGetImageURL(context);
+                String foodID = uuid.v1().toString();
+                AddFoodModel data = AddFoodModel(
+                  name: foodNameController.text.trim(),
+                  foodID: foodID,
+                  uploadTime: DateTime.now(),
+                  restaurantUID: auth.currentUser!.uid,
+                  description: foodDescriptionController.text.trim(),
+                  foodImageURL: context.read<AddFoodProvider>().foodImageURL!,
+                  isVegetarian: foodIsPureVeg,
+                  price: foodPriceController.text.trim(),
+                );
+                FoodDataCRUDServices.uploadFoodData(context, data);
+              },
+              child: pressedAddFoodItemButton
+                  ? CircularProgressIndicator(
+                      color: white,
+                    )
+                  : Text(
+                      'Add Food',
+                      style: AppTextStyles.body16Bold.copyWith(color: white),
+                    ),
+            ),
           ],
         ),
       ),

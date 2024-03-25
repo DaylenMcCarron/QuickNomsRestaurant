@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -18,6 +19,7 @@ class AddFoodProvider extends ChangeNotifier {
             images: [foodImage!], context: context);
     if (url.isNotEmpty) {
       foodImageURL = url[0];
+      log(foodImageURL!);
     }
     notifyListeners();
   }
