@@ -4,7 +4,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
+import 'package:quicknomsrestaurant/controller/provider/FoodProvider/FoodProvider.dart';
 import 'package:quicknomsrestaurant/controller/services/toastServices/toastMessageService.dart';
 import 'package:quicknomsrestaurant/model/FoodModel/FoodModel.dart';
 

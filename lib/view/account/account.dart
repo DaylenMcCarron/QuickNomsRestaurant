@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:quicknomsrestaurant/controller/provider/FoodProvider/FoodProvider.dart';
+import 'package:quicknomsrestaurant/controller/provider/restaurantRegisterProvider/restaurantRegisterProvider.dart';
+import 'package:quicknomsrestaurant/controller/services/authServices/mobileAuthServices.dart';
 import 'package:quicknomsrestaurant/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,6 +17,14 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<RestaurantProvider>().getRestaurantData();
+    });
+  }
+
   List account = [
     [FontAwesomeIcons.shop, 'Orders'],
     [FontAwesomeIcons.heart, 'Your favourites'],
@@ -38,30 +50,48 @@ class _AccountScreenState extends State<AccountScreen> {
             SizedBox(
               height: 2.h,
             ),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3.h,
-                  backgroundColor: Colors.black54,
-                  child: CircleAvatar(
-                    radius: 3.h - 1,
-                    backgroundColor: const Color.fromARGB(255, 240, 240, 240),
-                    child: FaIcon(
-                      FontAwesomeIcons.user,
-                      size: 3.h,
-                      color: Colors.black54,
+            Consumer<RestaurantProvider>(
+                builder: (context, restaurantProvider, child) {
+              if (restaurantProvider.restaurantData == null) {
+                return Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 3.h,
+                      backgroundColor: Colors.black54,
+                      child: CircleAvatar(
+                        radius: 3.h - 1,
+                        backgroundColor:
+                            const Color.fromARGB(255, 240, 240, 240),
+                        child: FaIcon(
+                          FontAwesomeIcons.user,
+                          size: 3.h,
+                          color: Colors.black54,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Text(
-                  'Daylen McC',
-                  style: AppTextStyles.body16,
-                )
-              ],
-            ),
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    Text(
+                      'Username',
+                      style: AppTextStyles.body16,
+                    )
+                  ],
+                );
+              } else {
+                return Row(
+                  children: [
+                    SizedBox(
+                      width: 4.w,
+                    ),
+                    Text(
+                      restaurantProvider.restaurantData!.restaurantName!,
+                      style: AppTextStyles.heading26Bold,
+                    )
+                  ],
+                );
+              }
+            }),
             SizedBox(
               height: 4.h,
             ),
@@ -71,6 +101,11 @@ class _AccountScreenState extends State<AccountScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: () {
+                      if (index == (account.length - 1)) {
+                        MobileAuthServices.signOut(context);
+                      }
+                    },
                     leading: FaIcon(
                       account[index][0],
                       size: 2.h,

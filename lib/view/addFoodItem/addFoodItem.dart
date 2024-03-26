@@ -243,6 +243,8 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
                   price: foodPriceController.text.trim(),
                 );
                 FoodDataCRUDServices.uploadFoodData(context, data);
+                await FoodDataCRUDServices.uploadFoodData(context, data);
+                await context.read<FoodProvider>().getFoodData();
               },
               child: pressedAddFoodItemButton
                   ? CircularProgressIndicator(

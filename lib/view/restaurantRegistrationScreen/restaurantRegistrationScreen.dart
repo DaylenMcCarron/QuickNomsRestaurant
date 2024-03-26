@@ -46,7 +46,7 @@ class _RestaurantRegistrationScreenState
             SizedBox(
               height: 2.h,
             ),
-            Consumer<RestaurantRegisterProvider>(
+            Consumer<RestaurantProvider>(
               builder: (context, registrationProvider, child) {
                 if (registrationProvider.restaurantBannerImages.isEmpty) {
                   return InkWell(
@@ -149,7 +149,7 @@ class _RestaurantRegistrationScreenState
                   pressedRestrauntRegisterButton = true;
                 });
                 await context
-                    .read<RestaurantRegisterProvider>()
+                    .read<RestaurantProvider>()
                     .updateRestaurantBannerImagesURL(context);
                 Position currentAddress =
                     await LocationServices.getCurrentLocation();
@@ -160,7 +160,7 @@ class _RestaurantRegistrationScreenState
                       restaurantLicenseNumberController.text.trim(),
                   restaurantUID: auth.currentUser!.uid,
                   bannerImages: context
-                      .read<RestaurantRegisterProvider>()
+                      .read<RestaurantProvider>()
                       .restaurantBannerImagesURL,
                   address: AddressModel(
                       latitude: currentAddress.latitude,

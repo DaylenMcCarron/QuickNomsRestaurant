@@ -29,8 +29,8 @@ class QuickNoms extends StatelessWidget {
             providers: [
               ChangeNotifierProvider<MobileAuthProvider>(
                   create: (_) => MobileAuthProvider()),
-              ChangeNotifierProvider<RestaurantRegisterProvider>(
-                  create: (_) => RestaurantRegisterProvider()),
+              ChangeNotifierProvider<RestaurantProvider>(
+                  create: (_) => RestaurantProvider()),
               ChangeNotifierProvider<FoodProvider>(
                   create: (_) => FoodProvider())
             ],

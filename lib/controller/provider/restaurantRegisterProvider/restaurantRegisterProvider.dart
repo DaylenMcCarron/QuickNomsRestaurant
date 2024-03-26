@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:quicknomsrestaurant/controller/services/imageServices/imageServices.dart';
+import 'package:quicknomsrestaurant/controller/services/restaurantCRUDServices/restaurantCRUDServices.dart';
+import 'package:quicknomsrestaurant/model/restaurantModel.dart';
 
-class RestaurantRegisterProvider extends ChangeNotifier {
+class RestaurantProvider extends ChangeNotifier {
   List<File> restaurantBannerImages = [];
   List<String> restaurantBannerImagesURL = [];
+  RestaurantModel? restaurantData;
 
   getRestaurantBannerImages(BuildContext context) async {
     restaurantBannerImages =
@@ -17,6 +20,11 @@ class RestaurantRegisterProvider extends ChangeNotifier {
     restaurantBannerImagesURL =
         await ImageServices.uploadImagesToFirebaseStorageAndGetURL(
             images: restaurantBannerImages, context: context);
+    notifyListeners();
+  }
+
+  getRestaurantData() async {
+    restaurantData = await RestaurantCRUDServices.fetchRestrauntData();
     notifyListeners();
   }
 }
