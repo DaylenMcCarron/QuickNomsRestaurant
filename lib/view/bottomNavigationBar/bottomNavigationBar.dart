@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:quicknomsrestaurant/menuScreen/menuScreen.dart';
 import 'package:quicknomsrestaurant/statusScreen/statusScreen.dart';
 import 'package:quicknomsrestaurant/view/account/account.dart';
-import 'package:quicknomsrestaurant/view/addFoodItem/addFoodItem.dart';
 import 'package:quicknomsrestaurant/view/home/homeScreen.dart';
-import 'package:quicknomsrestaurant/view/restaurantRegistrationScreen/restaurantRegistrationScreen.dart';
 
 class BottomNavigationBarQuickNoms extends StatefulWidget {
   const BottomNavigationBarQuickNoms({super.key});

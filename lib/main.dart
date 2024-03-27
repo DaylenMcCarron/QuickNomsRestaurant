@@ -5,7 +5,6 @@ import 'package:quicknomsrestaurant/controller/provider/FoodProvider/FoodProvide
 import 'package:quicknomsrestaurant/controller/provider/authProvider/authProvider.dart';
 import 'package:quicknomsrestaurant/controller/provider/restaurantRegisterProvider/restaurantRegisterProvider.dart';
 import 'package:quicknomsrestaurant/firebase_options.dart';
-import 'package:quicknomsrestaurant/view/bottomNavigationBar/bottomNavigationBar.dart';
 import 'package:quicknomsrestaurant/view/signInLogicScreen/signInLogicScreen.dart';
 import 'package:sizer/sizer.dart';
 

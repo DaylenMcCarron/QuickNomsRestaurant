@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:flutter_geofire/flutter_geofire.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
 
@@ -16,16 +16,17 @@ class LocationServices {
     Position currentPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.bestForNavigation);
     log(currentPosition.toString());
+
     return currentPosition;
   }
 
-  static registerRestaurantLocationInGeofire() async {
+  static registerRestaurantLocationInGeofire(String restaurantUID) async {
     Position currentLocation = await getCurrentLocation();
-    Geofire.initialize('Restaurants');
-    Geofire.setLocation(
-      auth.currentUser!.uid,
-      currentLocation.latitude,
-      currentLocation.longitude,
-    );
+    GeoFirePoint myLocation = geo.point(
+        latitude: currentLocation.latitude,
+        longitude: currentLocation.longitude);
+    firestore
+        .collection('location')
+        .add({'restaurantUID': restaurantUID, 'position': myLocation.data});
   }
 }

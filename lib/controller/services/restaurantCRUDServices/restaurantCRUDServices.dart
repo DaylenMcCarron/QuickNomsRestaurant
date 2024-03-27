@@ -4,12 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
-import 'package:quicknomsrestaurant/model/FoodModel/FoodModel.dart';
 import 'package:quicknomsrestaurant/model/restaurantModel.dart';
 import 'package:quicknomsrestaurant/view/signInLogicScreen/signInLogicScreen.dart';
 
 class RestaurantCRUDServices {
-  static RegisterRestaurant(RestaurantModel data, BuildContext context) async {
+  static registerRestaurant(RestaurantModel data, BuildContext context) async {
     try {
       await firestore
           .collection('Restaurant')

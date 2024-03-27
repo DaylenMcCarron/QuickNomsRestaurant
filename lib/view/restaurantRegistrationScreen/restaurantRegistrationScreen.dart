@@ -34,7 +34,7 @@ class _RestaurantRegistrationScreenState
   TextEditingController restaurantLicenseNumberController =
       TextEditingController();
   CarouselController controller = CarouselController();
-  bool pressedRestrauntRegisterButton = false;
+  bool pressedRestaurantRegisterButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -146,14 +146,15 @@ class _RestaurantRegistrationScreenState
             ElevatedButton(
               onPressed: () async {
                 setState(() {
-                  pressedRestrauntRegisterButton = true;
+                  pressedRestaurantRegisterButton = true;
                 });
                 await context
                     .read<RestaurantProvider>()
                     .updateRestaurantBannerImagesURL(context);
                 Position currentAddress =
                     await LocationServices.getCurrentLocation();
-                LocationServices.registerRestaurantLocationInGeofire();
+                LocationServices.registerRestaurantLocationInGeofire(
+                    auth.currentUser!.uid);
                 RestaurantModel data = RestaurantModel(
                   restaurantName: restaurantNameController.text.trim(),
                   restaurantLicenseNumber:
@@ -166,11 +167,11 @@ class _RestaurantRegistrationScreenState
                       latitude: currentAddress.latitude,
                       longitude: currentAddress.longitude),
                 );
-                RestaurantCRUDServices.RegisterRestaurant(data, context);
+                RestaurantCRUDServices.registerRestaurant(data, context);
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: black, minimumSize: Size(90.w, 6.h)),
-              child: pressedRestrauntRegisterButton
+              child: pressedRestaurantRegisterButton
                   ? CircularProgressIndicator(
                       color: white,
                     )

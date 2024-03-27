@@ -242,7 +242,6 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
                   isVegetarian: foodIsPureVeg,
                   price: foodPriceController.text.trim(),
                 );
-                FoodDataCRUDServices.uploadFoodData(context, data);
                 await FoodDataCRUDServices.uploadFoodData(context, data);
                 await context.read<FoodProvider>().getFoodData();
               },

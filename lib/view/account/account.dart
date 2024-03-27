@@ -1,11 +1,17 @@
+import 'dart:developer';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:provider/provider.dart';
+import 'package:quicknomsrestaurant/constant/constant.dart';
 import 'package:quicknomsrestaurant/controller/provider/FoodProvider/FoodProvider.dart';
 import 'package:quicknomsrestaurant/controller/provider/restaurantRegisterProvider/restaurantRegisterProvider.dart';
 import 'package:quicknomsrestaurant/controller/services/authServices/mobileAuthServices.dart';
+import 'package:quicknomsrestaurant/controller/services/locationServices/locationServices.dart';
 import 'package:quicknomsrestaurant/utils/textStyles.dart';
 import 'package:sizer/sizer.dart';
 
@@ -104,6 +110,14 @@ class _AccountScreenState extends State<AccountScreen> {
                     onTap: () {
                       if (index == (account.length - 1)) {
                         MobileAuthServices.signOut(context);
+                      }
+                      if (index == 2) {
+                        GeoFirePoint myLocation = geo.point(
+                            latitude: 12.960632, longitude: 77.641603);
+                        firestore.collection('locations').add({
+                          'name': 'random name',
+                          'position': myLocation.data
+                        });
                       }
                     },
                     leading: FaIcon(
