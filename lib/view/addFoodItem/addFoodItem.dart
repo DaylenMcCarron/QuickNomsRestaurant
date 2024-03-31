@@ -22,7 +22,8 @@ class AddFoodItemScreen extends StatefulWidget {
 class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
   TextEditingController foodNameController = TextEditingController();
   TextEditingController foodDescriptionController = TextEditingController();
-  TextEditingController foodPriceController = TextEditingController();
+  TextEditingController actualPriceController = TextEditingController();
+  TextEditingController discountedPriceController = TextEditingController();
   bool foodIsPureVeg = true;
   bool pressedAddFoodItemButton = false;
 
@@ -124,9 +125,18 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
               height: 2.h,
             ),
             CommonTextfield(
-              controller: foodPriceController,
-              title: 'Price',
-              hintText: 'Food Price',
+              controller: actualPriceController,
+              title: 'Actual price',
+              hintText: 'Actual Food Price',
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(
+              height: 2.h,
+            ),
+            CommonTextfield(
+              controller: discountedPriceController,
+              title: 'Discounted price',
+              hintText: 'Discounted Food Price',
               keyboardType: TextInputType.number,
             ),
             SizedBox(
@@ -240,7 +250,8 @@ class _AddFoodItemScreenState extends State<AddFoodItemScreen> {
                   description: foodDescriptionController.text.trim(),
                   foodImageURL: context.read<FoodProvider>().foodImageURL!,
                   isVegetarian: foodIsPureVeg,
-                  price: foodPriceController.text.trim(),
+                  actualPrice: actualPriceController.text.trim(),
+                  discountedPrice: discountedPriceController.text.trim(),
                 );
                 await FoodDataCRUDServices.uploadFoodData(context, data);
                 await context.read<FoodProvider>().getFoodData();

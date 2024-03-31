@@ -59,55 +59,65 @@ class _MenuScreenState extends State<MenuScreen> {
                     itemBuilder: (context, index) {
                       FoodModel foodData = foodProvider.items[index];
                       return Container(
-                        margin: EdgeInsets.symmetric(vertical: 1.h),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 1.h),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.sp),
-                          border: Border.all(color: black87),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              height: 20.h,
-                              width: 100.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5.sp),
-                                image: DecorationImage(
-                                    image: NetworkImage(foodData.foodImageURL),
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                            SizedBox(height: 1.h),
-                            Text(
-                              foodData.name,
-                              style: AppTextStyles.body14Bold,
-                            ),
-                            SizedBox(
-                              height: 0.5.h,
-                            ),
-                            Text(
-                              foodData.description,
-                              style:
-                                  AppTextStyles.small12.copyWith(color: grey),
-                            ),
-                            SizedBox(
-                              height: 1.5.h,
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
+                          margin: EdgeInsets.symmetric(vertical: 1.h),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 2.w, vertical: 1.h),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.sp),
+                            border: Border.all(color: black87),
+                          ),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  '₹ ${foodData.price}',
-                                  style: AppTextStyles.body16Bold,
+                                Container(
+                                  height: 20.h,
+                                  width: 100.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.sp),
+                                    image: DecorationImage(
+                                        image:
+                                            NetworkImage(foodData.foodImageURL),
+                                        fit: BoxFit.cover),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      );
+                                SizedBox(height: 1.h),
+                                Text(
+                                  foodData.name,
+                                  style: AppTextStyles.body14Bold,
+                                ),
+                                SizedBox(
+                                  height: 0.5.h,
+                                ),
+                                Text(
+                                  foodData.description,
+                                  style: AppTextStyles.small12
+                                      .copyWith(color: grey),
+                                ),
+                                SizedBox(
+                                  height: 1.5.h,
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '₹${foodData.discountedPrice}',
+                                          style: AppTextStyles.body14.copyWith(
+                                              decoration:
+                                                  TextDecoration.lineThrough,
+                                              color: grey),
+                                        ),
+                                        Text(
+                                          '₹${foodData.actualPrice}',
+                                          style: AppTextStyles.body16Bold,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ]));
                     });
               }
             },

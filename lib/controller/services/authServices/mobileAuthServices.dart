@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:quicknomsrestaurant/constant/constant.dart';
 import 'package:quicknomsrestaurant/controller/provider/authProvider/authProvider.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:quicknomsrestaurant/controller/services/pushNotificationServices/pushNotificationServices.dart';
 import 'package:quicknomsrestaurant/view/authScreens/mobileLoginScreen.dart';
 import 'package:quicknomsrestaurant/view/authScreens/otpScreen.dart';
 import 'package:quicknomsrestaurant/view/bottomNavigationBar/bottomNavigationBar.dart';
@@ -26,6 +27,7 @@ class MobileAuthServices {
             : restaurantIsRegistered = false;
         log('Restraunt is Registered = $restaurantIsRegistered');
         if (restaurantIsRegistered) {
+          PushNotificationServices.initializeFCM();
           Navigator.pushAndRemoveUntil(
             context,
             PageTransition(

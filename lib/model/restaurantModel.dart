@@ -8,12 +8,14 @@ class RestaurantModel {
   String? restaurantUID;
   List<String>? bannerImages;
   AddressModel? address;
+  String? cloudMessagingToken;
   RestaurantModel({
     this.restaurantName,
     this.restaurantLicenseNumber,
     this.restaurantUID,
     this.bannerImages,
     this.address,
+    this.cloudMessagingToken,
   });
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -22,6 +24,7 @@ class RestaurantModel {
       'restaurantUID': restaurantUID,
       'bannerImages ': bannerImages,
       'address': address?.toMap(),
+      'cloudMessagingToken': cloudMessagingToken,
     };
   }
 
@@ -41,6 +44,9 @@ class RestaurantModel {
           : null,
       address: map['address'] != null
           ? AddressModel.fromMap(map['address'] as Map<String, dynamic>)
+          : null,
+      cloudMessagingToken: map['cloudMessagingToken'] != null
+          ? map['cloudMessagingToken'] as String
           : null,
     );
   }
